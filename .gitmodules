@@ -1,0 +1,3 @@
+[submodule "libs/lib-a"]
+	path = libs/lib-a
+	url = https://github.com/oscarludick/lib-a.git
