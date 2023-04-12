@@ -15,7 +15,10 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
-      "@test/lib-a": ["libs/lib-a/src/index.ts"]
+      "@test/lib-a": ["dist/libs/lib-a"],
+      "@test/lib-a/components": ["dist/libs/lib-a/components"],
+      "@test/lib-a/components/*": ["libs/lib-a/components/*"],
+      "@test/lib-b": ["dist/libs/lib-b"]
     }
   },
   "exclude": ["node_modules", "tmp"]
