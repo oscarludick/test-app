@@ -7,3 +7,6 @@
 [submodule "apps/app-a"]
 	path = apps/app-a
 	url = https://github.com/oscarludick/app-a.git
+[submodule "apps/app-b"]
+	path = apps/app-b
+	url = https://github.com/oscarludick/app-b.git

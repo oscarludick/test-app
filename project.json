@@ -1,0 +1,29 @@
+{
+  "name": "apps",
+  "$schema": "node_modules/nx/schemas/project-schema.json",
+  "prefix": "apps",
+  "sourceRoot": "apps",
+  "targets": {
+    "app-b:build": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "cd apps/app-b && npm run build",
+        "parallel": true
+      }
+    },
+    "app-b:serve": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "cd apps/app-b && npm run serve",
+        "parallel": true
+      }
+    },
+    "app-b:test": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "cd apps/app-b && npm run test",
+        "parallel": true
+      }
+    }
+  }
+}
