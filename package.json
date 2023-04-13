@@ -4,10 +4,8 @@
   "license": "MIT",
   "scripts": {},
   "private": true,
-  "workspaces":[
-    "apps/apps-a",
-    "libs/lib-a",
-    "libs/lib-b"
+  "workspaces": [
+    "dist/libs/*"
   ],
   "dependencies": {
     "@angular/animations": "~15.2.0",
