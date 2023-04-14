@@ -5,8 +5,8 @@
   "scripts": {},
   "private": true,
   "workspaces": [
-    "apps/*",
-    "libs/*"
+    "libs/**",
+    "apps/**"
   ],
   "dependencies": {
     "@angular-devkit/build-angular": "~15.2.0",
