@@ -15,10 +15,10 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
-      "@test/lib-a": ["libs/lib-a/src/index.ts"],
-      "@test/lib-a/components": ["libs/lib-a/components/src/index.ts"],
-      "@test/lib-a/components/src/*": ["libs/lib-a/components/src/*"],
-      "@test/lib-b": ["libs/lib-b/src/index.ts"]
+      "@testpolymon/lib-a": ["libs/lib-a/src/index.ts"],
+      "@testpolymon/lib-a/components": ["libs/lib-a/components/src/index.ts"],
+      "@testpolymon/lib-a/components/src/*": ["libs/lib-a/components/src/*"],
+      "@testpolymon/lib-b": ["libs/lib-b/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]
