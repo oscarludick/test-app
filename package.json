@@ -2,7 +2,11 @@
   "name": "test-app",
   "version": "0.0.0",
   "license": "MIT",
-  "scripts": {},
+  "scripts": {
+    "serve:app-b": "npx nx serve app-b --port=4201",
+    "watch:build:lib-a": "npx nx run lib-a:build --watch",
+    "watch:build:lib-b": "npx nx run lib-b:build --watch"
+  },
   "private": true,
   "workspaces": [
     "libs/**",

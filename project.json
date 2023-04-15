@@ -1,0 +1,16 @@
+{
+  "name": "apps",
+  "targets": {
+    "dev:app-b": {
+      "executor": "nx:run-commands",
+      "options": {
+        "commands": [
+          "npm run serve:app-b",
+          "npm run watch:build:lib-a",
+          "npm run watch:build:lib-b"
+        ],
+        "parallel": true
+      }
+    }
+  }
+}
