@@ -6,3 +6,4 @@ echo "post-update"
 git add .
 git commit -m "chore(test-app): updated git ref [skip ci]"
 git push
+git pull origin --ff
