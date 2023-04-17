@@ -14,7 +14,7 @@ git submodule foreach --recursive "
   if ! git diff --quiet HEAD; then
     git add . && git commit -m \"$TYPE(\$SUBMODULE_PATH)$MESSAGE\" || : && git push;
     echo \"\$toplevel"
-    cd \"\$toplevel"
+    cd \"\$toplevel
     git add \"\$toplevel/\$path\"
     git commit --no-verify -m \"chore\(test-app\): updated git ref \[skip ci\]\"
   fi
