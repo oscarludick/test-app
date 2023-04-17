@@ -1,7 +1,7 @@
 #!/usr/bin/env sh
 . "$(dirname -- "$0")/_/husky.sh"
 
-echo "update hook called"
+echo "update"
 
 git add .
 git commit -m "chore(test-app): updated git ref [skip ci]"

@@ -1,6 +1,8 @@
 #!/usr/bin/env sh
 . "$(dirname -- "$0")/_/husky.sh"
 
+echo "post-commit"
+
 # Get the type and message of the last commit in the main repository
 LAST_COMMIT=$(git log -1 --pretty=%B)
 TYPE=$(echo $LAST_COMMIT | cut -d'(' -f1)
