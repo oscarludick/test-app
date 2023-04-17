@@ -1,9 +1,9 @@
 #!/usr/bin/env sh
 . "$(dirname -- "$0")/_/husky.sh"
 
-echo "post-update"
+echo "pre-push"
 
 git add .
-git commit -m "chore(test-app): updated git ref [skip ci]"
-git push
-git pull origin --ff
+git commit -m --no-verify "chore(test-app): updated git ref [skip ci]"
+git push --no-verify
+git pull origin --ff --no-verify
