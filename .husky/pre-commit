@@ -2,3 +2,15 @@
 . "$(dirname -- "$0")/_/husky.sh"
 
 echo "pre-commit"
+
+files=$(git diff --cached --name-only --diff-filter=ACM | grep ".js\|.jsx\|.ts\|.tsx\|.css\|.scss\|.less\|.json\|.md$")
+
+if [ -z "$files" ]; then
+  echo "No matching files found for Prettier."
+  exit 0
+fi
+
+echo "$files" | xargs ./node_modules/.bin/prettier --write
+
+git add $files
+echo "Prettier completed."
