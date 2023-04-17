@@ -3,5 +3,6 @@
 
 echo "pre-push"
 
-git add $(git submodule foreach --recursive 'echo $(pwd)')
+SUBMODULE_DIRS=$(git submodule foreach --quiet 'echo $path')
+git add $SUBMODULE_DIRS
 git commit --no-verify -m "chore(test-app): updated git ref [skip ci]"
