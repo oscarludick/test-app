@@ -4,6 +4,6 @@
 echo "pre-push"
 
 git add .
-git commit -m --no-verify "chore(test-app): updated git ref [skip ci]"
+git commit --no-verify -m "chore(test-app): updated git ref [skip ci]"
 git push --no-verify
 git pull origin --ff --no-verify
