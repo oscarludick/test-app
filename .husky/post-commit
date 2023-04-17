@@ -1,0 +1,15 @@
+#!/usr/bin/env sh
+. "$(dirname -- "$0")/_/husky.sh"
+
+# Get the type and message of the last commit in the main repository
+LAST_COMMIT=$(git log -1 --pretty=%B)
+TYPE=$(echo $LAST_COMMIT | cut -d'(' -f1)
+MESSAGE=$(echo $LAST_COMMIT | cut -d')' -f2 | xargs)
+
+# Loop through all submodules and add and commit changes with a custom message
+git submodule foreach "
+  PATH=\$(echo \$path | sed 's#^libs/##;s#^apps/##')
+  git add .
+  git commit -m \"$TYPE(\$PATH): $MESSAGE\" || :
+  git push
+"
