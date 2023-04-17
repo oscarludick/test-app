@@ -3,6 +3,11 @@
 
 echo "pre-push"
 
-SUBMODULE_DIRS=$(git submodule foreach --quiet 'echo $path')
-git add $SUBMODULE_DIRS
-git commit --no-verify -m "chore(test-app): updated git ref [skip ci]"
+SUBMODULE_DIRS=""
+git submodule foreach --quiet 'if ! git diff --quiet HEAD; then SUBMODULE_DIRS="$SUBMODULE_DIRS $path"; fi'
+
+if [ -n "$SUBMODULE_DIRS" ]; then
+  git add $SUBMODULE_DIRS
+  git commit --no-verify -m "chore(test-app): updated git ref [skip ci]"
+fi
+
