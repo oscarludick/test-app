@@ -8,14 +8,26 @@ LAST_COMMIT=$(git log -1 --pretty=%B)
 TYPE=$(echo $LAST_COMMIT | cut -d'(' -f1)
 MESSAGE=$(echo $LAST_COMMIT | cut -d')' -f2 | xargs)
 
-# Loop through all submodules and add and commit changes with a custom message
-git submodule foreach --recursive "
-  SUBMODULE_PATH=\$(echo \$path | sed 's#^libs/##;s#^apps/##');
+# Loop through all submodules
+for SUBMODULE in $(git submodule --quiet foreach 'echo $path'); do
+  SUBMODULE_PATH=$(echo $SUBMODULE | sed 's#^libs/##;s#^apps/##');
   if ! git diff --quiet HEAD; then
-    git add . && git commit -m \"$TYPE(\$SUBMODULE_PATH)$MESSAGE\" || : && git push;
-    cd \"\$toplevel\"
-    git add \"\$toplevel/\$path\"
-    git commit --no-verify -m "chore(test-app): updated git ref [skip ci\]"
+    cd "$SUBMODULE" && git add . && git commit -m "$TYPE($SUBMODULE_PATH)$MESSAGE" || : && git push;
+    git add "$SUBMODULE"
+    git commit --no-verify -m "chore(test-app): updated git ref [skip ci]"
   fi
-"
+done
+
 exit 0
+
+# Loop through all submodules and add and commit changes with a custom message
+# git submodule foreach --recursive "
+#   SUBMODULE_PATH=\$(echo \$path | sed 's#^libs/##;s#^apps/##');
+#   if ! git diff --quiet HEAD; then
+#     git add . && git commit -m \"$TYPE(\$SUBMODULE_PATH)$MESSAGE\" || : && git push;
+#     cd \"\$toplevel\"
+#     git add \"\$toplevel/\$path\"
+#     git commit --no-verify -m "chore(test-app): updated git ref [skip ci\]"
+#   fi
+# "
+
