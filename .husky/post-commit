@@ -7,9 +7,17 @@ TYPE=$(echo $LAST_COMMIT | cut -d'(' -f1)
 MESSAGE=$(echo $LAST_COMMIT | cut -d')' -f2 | xargs)
 
 # Loop through all submodules and add and commit changes with a custom message
-git submodule foreach "
-  PATH=\$(echo \$path | sed 's#^libs/##;s#^apps/##')
-  git add .
-  git commit -m \"$TYPE(\$PATH): $MESSAGE\" || :
-  git push
+git submodule foreach --recursive "
+  SUBMODULE_PATH=\$(echo \$path | sed 's#^libs/##;s#^apps/##');
+  if ! git diff --quiet HEAD; then
+    git add . && git commit -m \"$TYPE(\$SUBMODULE_PATH): $MESSAGE\" || : && git push;
+  fi
 "
+
+git add .
+git commit -m "chore(test-app): updated ref git paths [skip ci]"
+git push
+#'if ! git diff --quiet HEAD; then git add . && git commit -m "$commit_type(\$path): $commit_msg"; fi'
+# #PATH=\$(echo \$path | sed 's#^libs/##;s#^apps/##');
+# git commit -m \"$TYPE(\$PATH)$MESSAGE\" || : ;
+# git push;
