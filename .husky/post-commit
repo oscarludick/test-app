@@ -17,7 +17,3 @@ git submodule foreach --recursive "
 git add .
 git commit -m "chore(test-app): updated ref git paths [skip ci]"
 git push
-#'if ! git diff --quiet HEAD; then git add . && git commit -m "$commit_type(\$path): $commit_msg"; fi'
-# #PATH=\$(echo \$path | sed 's#^libs/##;s#^apps/##');
-# git commit -m \"$TYPE(\$PATH)$MESSAGE\" || : ;
-# git push;
