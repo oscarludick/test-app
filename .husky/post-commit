@@ -13,6 +13,9 @@ git submodule foreach --recursive "
   SUBMODULE_PATH=\$(echo \$path | sed 's#^libs/##;s#^apps/##');
   if ! git diff --quiet HEAD; then
     git add . && git commit -m \"$TYPE(\$SUBMODULE_PATH)$MESSAGE\" || : && git push;
+    cd \"\$toplevel/\$path\"
+    git add \$path
+    git commit --no-verify -m "chore\(test-app\): updated git ref \[skip ci\]"
   fi
 "
-exit 1
+exit 0
