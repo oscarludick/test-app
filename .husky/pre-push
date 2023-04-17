@@ -5,6 +5,7 @@ echo "pre-push"
 
 SUBMODULE_DIRS=""
 git submodule foreach --quiet 'if ! git diff --quiet HEAD; then SUBMODULE_DIRS="$SUBMODULE_DIRS $path"; fi'
+echo "$SUBMODULE_DIRS"
 
 if [ -n "$SUBMODULE_DIRS" ]; then
   git add $SUBMODULE_DIRS
