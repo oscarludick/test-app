@@ -1,0 +1,6 @@
+#!/usr/bin/env sh
+. "$(dirname -- "$0")/_/husky.sh"
+
+git add .
+git commit -m "chore(test-app): updated ref git paths [skip ci]"
+git push
