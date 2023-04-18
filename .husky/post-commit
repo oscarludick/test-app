@@ -3,9 +3,8 @@
 
 echo "post-commit"
 
-# bash ./.husky/00-branch-switch.sh master
-
 # Get the type and message of the last commit in the main repository
+BRANCH_CURRENT=$(git branch --show-current)
 LAST_COMMIT=$(git log -1 --pretty=format:"%s")
 TYPE=$(echo $LAST_COMMIT | cut -d'(' -f1)
 MESSAGE=$(echo $LAST_COMMIT | cut -d')' -f2 | xargs)
@@ -19,7 +18,7 @@ for SUBMODULE in $(git submodule --quiet foreach 'echo $path'); do
       cd "$SUBMODULE" || exit
       git add .
       git commit -m "$TYPE($SUBMODULE_PATH)$MESSAGE"
-      git push --quiet || git push --quiet --set-upstream origin
+      git push --quiet || git push --quiet --set-upstream origin $BRANCH_CURRENT
     )
 
     # Return to root folder and commit the submodule new reference
@@ -28,4 +27,5 @@ for SUBMODULE in $(git submodule --quiet foreach 'echo $path'); do
   fi
 done
 
+# bash ./.husky/00-branch-switch.sh master
 exit 0
