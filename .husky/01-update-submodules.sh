@@ -28,4 +28,4 @@ for SUBMODULE in $(git submodule --quiet foreach 'echo $path'); do
   fi
 done
 
-git config --global push.default nothing
+git config --global push.default simple
