@@ -1,4 +1,9 @@
 BRANCH_NAME=$1
+BRANCH_CURRENT=$(git branch --show-current)
+
+if [ "$BRANCH_NAME" == "$BRANCH_CURRENT" ]; then
+  exit 0;
+fi
 
 # Check if BRANCH_NAME is empty
 if [ -z "$BRANCH_NAME" ]; then
@@ -6,6 +11,7 @@ if [ -z "$BRANCH_NAME" ]; then
   exit 1
 fi
 
+git reset HEAD .
 git stash save --keep-index "Stashing added changes"
 
 # Check if branch exists in main repo
@@ -39,5 +45,4 @@ for SUBMODULE in $(git submodule --quiet foreach 'echo $path'); do
 done
 
 git stash pop
-# Exit with success status
-exit 0
+git add .
