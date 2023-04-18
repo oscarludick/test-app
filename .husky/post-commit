@@ -3,16 +3,28 @@
 
 echo "post-commit"
 
-# Get the type and message of the last commit in the main repository
-LAST_COMMIT=$(git log -1 --pretty=%B)
-TYPE=$(echo $LAST_COMMIT | cut -d'(' -f1)
-MESSAGE=$(echo $LAST_COMMIT | cut -d')' -f2 | xargs)
+# bash ./.husky/00-branch-switch.sh master
 
-# Loop through all submodules and add and commit changes with a custom message
-git submodule foreach --recursive "
-  SUBMODULE_PATH=\$(echo \$path | sed 's#^libs/##;s#^apps/##');
-  if ! git diff --quiet HEAD; then
-    git add . && git commit -m \"$TYPE(\$SUBMODULE_PATH): $MESSAGE\" || : && git push;
-  fi
-"
+# # Get the type and message of the last commit in the main repository
+# LAST_COMMIT=$(git log -1 --pretty=%B)
+# TYPE=$(echo $LAST_COMMIT | cut -d'(' -f1)
+# MESSAGE=$(echo $LAST_COMMIT | cut -d')' -f2 | xargs)
 
+# # Loop through all submodules
+# for SUBMODULE in $(git submodule --quiet foreach 'echo $path'); do
+#   SUBMODULE_PATH=$(echo $SUBMODULE | sed 's#^libs/##;s#^apps/##')
+#   if ! git diff --quiet HEAD "$SUBMODULE"; then
+#     # Commit and push the submodules with the same commit message
+#     cd "$SUBMODULE"
+#     git add .
+#     git commit -m "$TYPE($SUBMODULE_PATH)$MESSAGE"
+#     git push
+
+#     # Return to root folder and commit the submodule new reference
+#     cd ../..
+#     git add $SUBMODULE
+#     git commit --no-verify -m "chore(test-app)$MESSAGE - updated reference [skip ci]"
+#   fi
+# done
+
+exit 1
