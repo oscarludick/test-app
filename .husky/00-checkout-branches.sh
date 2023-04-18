@@ -2,8 +2,8 @@
 
 #Get branches to checkout
 BRANCH_NAME=$1
+BRANCH_DEFAULT=${2:-master}
 BRANCH_CURRENT=$(git branch --show-current)
-BRANCH_DEFAULT=master
 
 # Check branches are not equal
 if [ "$BRANCH_NAME" == "$BRANCH_CURRENT" ]; then

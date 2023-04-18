@@ -21,6 +21,6 @@ while :; do
   esac
 done
 
-bash ./.husky/00-checkout-branches.sh $BRANCH_NAME
+bash ./.husky/00-checkout-branches.sh $BRANCH_NAME master
 
 exit 0
