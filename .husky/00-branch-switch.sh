@@ -6,6 +6,8 @@ if [ -z "$BRANCH_NAME" ]; then
   exit 1
 fi
 
+git reset HEAD .
+
 # Check if branch exists in main repo
 if git show-ref --verify --quiet refs/heads/$BRANCH_NAME; then
   # If branch exists, switch to it if not already on it
@@ -36,5 +38,6 @@ for SUBMODULE in $(git submodule --quiet foreach 'echo $path'); do
   fi
 done
 
+git add .
 # Exit with success status
 exit 0

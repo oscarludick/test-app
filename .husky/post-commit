@@ -3,6 +3,8 @@
 
 echo "post-commit"
 
+bash ./.husky/00-branch-switch.sh master
+
 # Get the type and message of the last commit in the main repository
 LAST_COMMIT=$(git log -1 --pretty=%B)
 TYPE=$(echo $LAST_COMMIT | cut -d'(' -f1)
@@ -21,7 +23,7 @@ for SUBMODULE in $(git submodule --quiet foreach 'echo $path'); do
     # Return to root folder and commit the submodule new reference
     cd ../..
     git add $SUBMODULE
-    git commit --no-verify -m "chore(test-app): updated git ref [skip ci]"
+    git commit --no-verify -m "chore(test-app)$MESSAGE - updated reference [skip ci]"
   fi
 done
 

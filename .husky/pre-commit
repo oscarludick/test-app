@@ -2,6 +2,7 @@
 . "$(dirname -- "$0")/_/husky.sh"
 
 echo "pre-commit"
+
 BRANCH_NAME=$(git branch --show-current)
 echo "You are about to commit" $(git diff --cached --name-only --diff-filter=ACM)
 echo "to branch $BRANCH_NAME"
