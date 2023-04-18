@@ -1,5 +1,6 @@
 BRANCH_NAME=$1
 BRANCH_CURRENT=$(git branch --show-current)
+BRANCH_DEFAULT=master
 
 if [ "$BRANCH_NAME" == "$BRANCH_CURRENT" ]; then
   exit 0;
@@ -11,8 +12,7 @@ if [ -z "$BRANCH_NAME" ]; then
   exit 1
 fi
 
-git reset HEAD .
-git stash save --keep-index "Stashing added changes"
+git stash save --keep-index "stash changes to checkout branch $BRANCH_NAME"
 
 # Check if branch exists in main repo
 if git show-ref --verify --quiet refs/heads/$BRANCH_NAME; then
@@ -22,7 +22,7 @@ if git show-ref --verify --quiet refs/heads/$BRANCH_NAME; then
   fi
 else
   # If branch does not exist, create and checkout it in main repo
-  git checkout -b $BRANCH_NAME master
+  git checkout -b $BRANCH_NAME $BRANCH_DEFAULT
 fi
 
 for SUBMODULE in $(git submodule --quiet foreach 'echo $path'); do
@@ -39,9 +39,10 @@ for SUBMODULE in $(git submodule --quiet foreach 'echo $path'); do
     fi
   else
     # If branch does not exist in submodule, create and checkout it
-    (cd $SUBMODULE && git checkout -b $BRANCH_NAME master)
+    (cd $SUBMODULE && git checkout -b $BRANCH_NAME $BRANCH_DEFAULT)
   fi
 done
 
-git stash pop
-git add .
+git stash apply
+
+exit 0

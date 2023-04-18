@@ -6,23 +6,26 @@ echo "post-commit"
 # bash ./.husky/00-branch-switch.sh master
 
 # Get the type and message of the last commit in the main repository
-LAST_COMMIT=$(git log -1 --pretty=%B)
+LAST_COMMIT=$(git log -1 --pretty=format:"%s")
 TYPE=$(echo $LAST_COMMIT | cut -d'(' -f1)
 MESSAGE=$(echo $LAST_COMMIT | cut -d')' -f2 | xargs)
 
 # Loop through all submodules
 for SUBMODULE in $(git submodule --quiet foreach 'echo $path'); do
-  SUBMODULE_PATH=$(echo $SUBMODULE | sed 's#^libs/##;s#^apps/##')
+  SUBMODULE_PATH=${SUBMODULE#*/}
   if ! git diff --quiet HEAD "$SUBMODULE"; then
     # Commit and push the submodules with the same commit message
-    cd "$SUBMODULE"
-    git add .
-    git commit -m "$TYPE($SUBMODULE_PATH)$MESSAGE"
-    git push || git push --set-upstream origin
+    (
+      cd "$SUBMODULE" || exit
+      git add .
+      git commit -m "$TYPE($SUBMODULE_PATH)$MESSAGE"
+      git push --quiet || git push --quiet --set-upstream origin
+    )
 
     # Return to root folder and commit the submodule new reference
-    cd ../..
     git add $SUBMODULE
     git commit --no-verify -m "chore(test-app)$MESSAGE - updated reference [skip ci]"
   fi
 done
+
+exit 0
