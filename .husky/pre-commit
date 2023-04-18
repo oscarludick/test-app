@@ -2,8 +2,27 @@
 . "$(dirname -- "$0")/_/husky.sh"
 
 echo "pre-commit"
-#bash ./.husky/00-branch-switch.sh
+BRANCH_NAME=$(git branch --show-current)
+echo "You are about to commit" $(git diff --cached --name-only --diff-filter=ACM)
+echo "to branch $BRANCH_NAME"
 
+while :; do
+  read -p "Do you want to switch branch? [y/n] " RESPONSE </dev/tty
+  case "${RESPONSE}" in
+  [Yy]*)
+    read -p "Branch name? " BRANCH_NAME </dev/tty
+    break
+    ;;
+  [Nn]*)
+    echo "Will be using $BRANCH_NAME"
+    break
+    ;;
+  esac
+done
+
+bash ./.husky/00-branch-switch.sh $BRANCH_NAME
+
+exit 0
 
 # files=$(git diff --cached --name-only --diff-filter=ACM | grep ".js\|.jsx\|.ts\|.tsx\|.css\|.scss\|.less\|.json\|.md$")
 
