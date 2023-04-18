@@ -6,7 +6,8 @@
     "prepare": "git submodule update --init --recursive && husky install",
     "serve:app-b": "npx nx serve app-b --port=4201",
     "watch:build:lib-a": "npx nx run lib-a:build --watch",
-    "watch:build:lib-b": "npx nx run lib-b:build --watch"
+    "watch:build:lib-b": "npx nx run lib-b:build --watch",
+    "test": ""
   },
   "private": true,
   "workspaces": [
