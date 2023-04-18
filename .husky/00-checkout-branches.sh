@@ -1,7 +1,11 @@
+#!/usr/bin/env sh
+
+#Get branches to checkout
 BRANCH_NAME=$1
 BRANCH_CURRENT=$(git branch --show-current)
 BRANCH_DEFAULT=master
 
+# Check branches are not equal
 if [ "$BRANCH_NAME" == "$BRANCH_CURRENT" ]; then
   exit 0;
 fi
