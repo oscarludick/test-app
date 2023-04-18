@@ -6,7 +6,7 @@ if [ -z "$BRANCH_NAME" ]; then
   exit 1
 fi
 
-git reset HEAD .
+git stash save --keep-index "Stashing added changes"
 
 # Check if branch exists in main repo
 if git show-ref --verify --quiet refs/heads/$BRANCH_NAME; then
@@ -38,6 +38,6 @@ for SUBMODULE in $(git submodule --quiet foreach 'echo $path'); do
   fi
 done
 
-git add .
+git stash pop
 # Exit with success status
 exit 0
