@@ -44,5 +44,3 @@ for SUBMODULE in $(git submodule --quiet foreach 'echo $path'); do
 done
 
 git stash apply
-
-exit 0
