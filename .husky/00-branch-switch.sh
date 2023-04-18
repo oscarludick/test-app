@@ -22,8 +22,7 @@ if git show-ref --verify --quiet refs/heads/$BRANCH_NAME; then
   fi
 else
   # If branch does not exist, create and checkout it in main repo
-  git branch $BRANCH_NAME
-  git checkout $BRANCH_NAME
+  git checkout -b $BRANCH_NAME master
 fi
 
 for SUBMODULE in $(git submodule --quiet foreach 'echo $path'); do
@@ -40,7 +39,7 @@ for SUBMODULE in $(git submodule --quiet foreach 'echo $path'); do
     fi
   else
     # If branch does not exist in submodule, create and checkout it
-    (cd $SUBMODULE && git branch $BRANCH_NAME && git checkout $BRANCH_NAME)
+    (cd $SUBMODULE && git checkout -b $BRANCH_NAME master)
   fi
 done
 
