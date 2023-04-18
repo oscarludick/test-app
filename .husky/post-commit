@@ -11,11 +11,18 @@ MESSAGE=$(echo $LAST_COMMIT | cut -d')' -f2 | xargs)
 # Loop through all submodules
 for SUBMODULE in $(git submodule --quiet foreach 'echo $path'); do
   SUBMODULE_PATH=$(echo $SUBMODULE | sed 's#^libs/##;s#^apps/##');
-  if ! git diff --quiet HEAD; then
-    cd "$SUBMODULE" && git add . && git commit -m "$TYPE($SUBMODULE_PATH)$MESSAGE" || : && git push;
+  if ! git diff --quiet HEAD "$SUBMODULE"; then
+    cd "$SUBMODULE"
+    git add .
+    git commit -m "$TYPE($SUBMODULE_PATH)$MESSAGE"
+    #git push origin HEAD:$(git rev-parse --abbrev-ref HEAD)
+    git push
+
+    cd ..
     echo "$SUBMODULE";
     echo pwd;
-    git add $SUBMODULE && git commit --no-verify -m "chore(test-app): updated git ref [skip ci]";
+    git add $SUBMODULE
+    git commit --no-verify -m "chore(test-app): updated git ref [skip ci]";
     echo "DONE: $SUBMODULE";
   fi
 done
