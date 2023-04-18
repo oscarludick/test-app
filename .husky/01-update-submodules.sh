@@ -8,6 +8,8 @@ TYPE=$(echo $LAST_COMMIT | cut -d'(' -f1)
 LAST_COMMIT=$(git log -1 --pretty=format:"%s")
 MESSAGE=$(echo $LAST_COMMIT | cut -d')' -f2 | xargs)
 
+git config --global push.default current
+
 # Loop through all submodules
 for SUBMODULE in $(git submodule --quiet foreach 'echo $path'); do
   SUBMODULE_PATH=${SUBMODULE#*/}
@@ -17,7 +19,7 @@ for SUBMODULE in $(git submodule --quiet foreach 'echo $path'); do
       cd "$SUBMODULE" || exit
       git add .
       git commit -m "$TYPE($SUBMODULE_PATH)$MESSAGE"
-      git push --quiet || git push --quiet --set-upstream origin $BRANCH_CURRENT
+      git push origin $BRANCH_CURRENT
     )
 
     # Return to root folder and commit the submodule new reference
@@ -25,3 +27,5 @@ for SUBMODULE in $(git submodule --quiet foreach 'echo $path'); do
     git commit --no-verify -m "chore(test-app)$MESSAGE - updated reference [skip ci]"
   fi
 done
+
+git config --global push.default nothing
