@@ -40,3 +40,4 @@ for SUBMODULE in $(git submodule --quiet foreach 'echo $path'); do
 done
 
 git stash pop
+git add .
