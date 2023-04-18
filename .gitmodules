@@ -6,3 +6,7 @@
 	path = apps/app-b
 	url = https://github.com/oscarludick/app-b.git
   branch = master
+[submodule "libs/lib-b"]
+	path = libs/lib-b
+	url = https://github.com/oscarludick/lib-b.git
+  branch = master
