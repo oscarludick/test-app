@@ -4,8 +4,8 @@
 BRANCH_CURRENT=$(git branch --show-current)
 
 #Format message commit
+LAST_COMMIT=${2:-$(git log -1 --pretty=format:"%s")}
 TYPE=$(echo $LAST_COMMIT | cut -d'(' -f1)
-LAST_COMMIT=$(git log -1 --pretty=format:"%s")
 MESSAGE=$(echo $LAST_COMMIT | cut -d')' -f2 | xargs)
 
 git config --global push.default current

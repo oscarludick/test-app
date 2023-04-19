@@ -3,6 +3,4 @@
 
 echo "post-commit"
 
-bash ./.husky/01-update-submodules.sh
-
 exit 0
