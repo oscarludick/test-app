@@ -6,9 +6,18 @@ BRANCH_CURRENT=$(git branch --show-current)
 # Get the last commit if there is not current commit message provided
 LAST_COMMIT=${1:-$(git log -1 --pretty=format:"%s")}
 # Get the type of the commit
-TYPE=$(echo $LAST_COMMIT | cut -d'(' -f1)
+TYPE=$(echo $LAST_COMMIT | cut -d'(' -f1) | xargs
 # Get the message of the commit
-MESSAGE=$(echo $LAST_COMMIT | cut -d')' -f2)
+MESSAGE=$(echo $LAST_COMMIT | cut -d')' -f2) | xargs
+
+echo "msgs"
+echo "$LAST_COMMIT"
+echo "$TYPE"
+echo "$MESSAGE"
+echo "$(echo $LAST_COMMIT | cut -d')' -f2)"
+echo "$LAST_COMMIT"
+
+exit 0;
 
 git config --global push.default current
 
