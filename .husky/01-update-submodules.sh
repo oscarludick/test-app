@@ -3,6 +3,7 @@
 # Get the type and message of the last commit in the main repository
 BRANCH_CURRENT=$(git branch --show-current)
 
+echo "$1"
 # Get the last commit if there is not current commit message provided
 LAST_COMMIT=${1:-$(git log -1 --pretty=format:"%s")}
 # Get the type of the commit
