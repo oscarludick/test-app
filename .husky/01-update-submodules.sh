@@ -4,6 +4,7 @@
 BRANCH_CURRENT=$(git branch --show-current)
 
 echo "$1"
+echo "$2"
 # Get the last commit if there is not current commit message provided
 LAST_COMMIT=${1:-$(git log -1 --pretty=format:"%s")}
 # Get the type of the commit
