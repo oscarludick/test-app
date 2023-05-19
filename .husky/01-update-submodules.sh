@@ -12,10 +12,6 @@ TYPE=$(echo $LAST_COMMIT | cut -d'(' -f1)
 # Get the message of the commit
 MESSAGE=$(echo $LAST_COMMIT | cut -d')' -f2)
 
-echo "$TYPE($SUBMODULE_PATH)$MESSAGE"
-
-exit 0;
-
 git config --global push.default current
 
 # Loop through all submodules
