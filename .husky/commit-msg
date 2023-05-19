@@ -1,0 +1,8 @@
+#!/usr/bin/env sh
+. "$(dirname -- "$0")/_/husky.sh"
+
+echo "commit-msg"
+
+echo "$1"
+
+bash ./.husky/01-update-submodules.sh $1
