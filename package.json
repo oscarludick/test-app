@@ -7,9 +7,7 @@
     "serve:app-b": "npx nx serve app-b --port=4201",
     "watch:build:lib-a": "npx nx run lib-a:build --watch",
     "watch:build:lib-b": "npx nx run lib-b:build --watch",
-    "command": "test b",
-    "docfun": "yarn nx workspace-generator jsdoc --path=apps/app-b/src/app/app.component.ts",
-    "testfun": "yarn nx workspace-generator jest --path=apps/app-b/src/app/app.component.ts"
+    "command": "test b"
   },
   "private": true,
   "workspaces": [
