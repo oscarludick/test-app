@@ -11,6 +11,7 @@ TYPE=$(echo $LAST_COMMIT | cut -d'(' -f1) | xargs
 MESSAGE=$(echo $LAST_COMMIT | cut -d')' -f2) | xargs
 
 echo "msgs"
+echo "$1"
 echo "$LAST_COMMIT"
 echo "$TYPE"
 echo "$MESSAGE"
