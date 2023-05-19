@@ -8,17 +8,11 @@ echo "$2"
 # Get the last commit if there is not current commit message provided
 LAST_COMMIT=${1:-$(git log -1 --pretty=format:"%s")}
 # Get the type of the commit
-TYPE=$(echo $LAST_COMMIT | cut -d'(' -f1) | xargs
+TYPE=$(echo $LAST_COMMIT | cut -d'(' -f1)
 # Get the message of the commit
-MESSAGE=$(echo $LAST_COMMIT | cut -d')' -f2) | xargs
+MESSAGE=$(echo $LAST_COMMIT | cut -d')' -f2)
 
-echo "msgs"
-echo "$1"
-echo "$LAST_COMMIT"
-echo "$TYPE"
-echo "$MESSAGE"
-echo "$(echo $LAST_COMMIT | cut -d')' -f2)"
-echo "$LAST_COMMIT"
+echo "$TYPE($SUBMODULE_PATH)$MESSAGE"
 
 exit 0;
 
