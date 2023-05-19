@@ -3,6 +3,6 @@
 
 echo "commit-msg"
 
-echo "$1"
+COMMIT_MESSAGE="$(cat "$1")"
 
-bash ./.husky/01-update-submodules.sh $1
+bash ./.husky/01-update-submodules.sh $COMMIT_MESSAGE
