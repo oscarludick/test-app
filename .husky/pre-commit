@@ -22,6 +22,5 @@ while :; do
 done
 
 bash ./.husky/00-checkout-branches.sh $BRANCH_NAME master
-bash ./.husky/01-update-submodules.sh $1
 
 exit 0
